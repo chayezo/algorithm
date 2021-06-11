@@ -1,6 +1,5 @@
-/**
+/*
  * 2차원 배열..........
- * 
  * 
  */
 function findBugInApples(arr) {
