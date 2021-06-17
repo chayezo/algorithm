@@ -9,7 +9,8 @@ function stringify(value) {
         return value ? 'true' : 'false';
     }
     if (typeof value === 'string') {
-        return `"${value.replace('"', '\\"')}"`;
+        return `"${value}"`;
+        // return `"${value.replace('"', '\\"')}"`;
     }
     if (Array.isArray(value)) {
         return `[${value.map(stringify).join(",")}]`;
