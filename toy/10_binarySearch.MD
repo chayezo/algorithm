@@ -10,6 +10,7 @@
 
 <br>
 크기가 n인 배열 arr에서 target이라는 특정 요소를 찾아낸다고 가정해보자.<br>
+
 - 이진 탐색의 절차
     1. low = 0, high = n-1로 초기화
     2. middle = (low + high) / 2;
