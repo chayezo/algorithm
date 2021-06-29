@@ -10,10 +10,10 @@ const binarySearch = function (arr, target, low = 0, high = arr.length - 1) {
         }
 
         if (arr[middle] < target) {
-            // 같아질때 리턴해야 하니까, 타겟이 더 클 경우는 -> firstPointer가 middle보다 큰 값.
+            // 같아질때 리턴해야 하니까, 타겟이 더 클 경우는 -> low가 middle보다 큰 값.
             return binarySearch(arr, target, middle + 1, high);
         } else {
-            // 타겟이 더 작을 경우 -> firstPointer가 middle보다 작은 값.
+            // 타겟이 더 작을 경우 -> high가 middle보다 작은 값.
             return binarySearch(arr, target, low, middle - 1);
         }
     }
