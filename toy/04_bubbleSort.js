@@ -2,10 +2,10 @@
 const bubbleSort = function (arr) {
     // 1. 배열의 길이만큼 반복 -> for 반복문
     // 2. 중첩 for문
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr.length - 1 - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                let swap = arr[j];
+    for (let i = 0; i < arr.length; i++) { // 순차적으로 비교하기 위한 반복문
+        for (let j = 0; j < arr.length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+            if (arr[j] > arr[j + 1]) { // 두 수를 비교하여 앞 수가 뒷 수보다 크면
+                let swap = arr[j]; // 두 수를 서로 바꿔준다
                 arr[j] = arr[j + 1];
                 arr[j + 1] = swap;
             }
@@ -25,6 +25,7 @@ const bubbleSort = function (arr, pointer = arr.length - 1) {
     // TODO: 배열을 입력받아 오름차순으로 정렬하여 리턴
     if (pointer === 0) return arr;
     for (let i = 0; i < pointer; i++) {
+        // 순차적으로 비교하기 위한 반복문
         if (arr[i] > arr[i + 1]) {
             let temp = arr[i + 1];
             arr[i + 1] = arr[i];
