@@ -97,3 +97,7 @@ const getItemFromTwoSortedArrays = function (arr1, arr2, k) {
 
     return Math.max(leftMax, rightMax);
 };
+
+let arr2 = arr1.filter((n) => n % 5 === 0)
+    .map((n) => n * 2);
+console.log(arr2);
