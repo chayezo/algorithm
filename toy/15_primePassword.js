@@ -161,6 +161,7 @@ const primePassword = (curPwd, newPwd) => {
         return true;
     };
 
+
     //숫자 배열화형 함수
     const destructNum = (num) => {
         return String(num)
@@ -228,3 +229,61 @@ const primePassword = (curPwd, newPwd) => {
     //다 while 다 돌려서 queue가 비었을때까지 못찾았으면 -1;
     return -1;
 };
+
+/*
+ * 
+ * 음......다시 정리 해보기.. 
+ * 
+ * 
+ */
+
+const primePassword = (curPwd, newPwd) => {
+    // 소수 확인
+    const isPrime = (num) => {
+        if (num % 2 === 0) {
+            return false;
+        }
+        let sqrt = parseInt(Math.sqrt(num));
+        for (let i = 3; i <= sqrt; i = i + 2) {
+            if (num % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // 숫자 배열로 만들어주는
+    const makeNumArr = (num) => {
+        let numStrArr = String(num).split('');
+        return numStrArr.map((el) => Number(el));
+    }
+    // 숫자로 만들어주는 모듈
+    const makeNum = (arr) => {
+        return Number(arr.join(''));
+    }
+    // BFS 시작
+    const check = new Array(10000).fill(false);
+    check[curPwd] = true;
+    const queue = [];
+    queue.push([0, curPwd]);
+    while (queue.length) {
+        let [count, now] = queue.shift();
+        if (now === newPwd) {
+            return count;
+        }
+
+        for (let i = 0; i < 4; i++) {
+            let nowArr = makeNumArr(now);
+            for (let j = 0; j < 10; j++) {
+                if (j !== nowArr[i]) {
+                    nowArr[i] = j;
+                    let nowNum = makeNum(nowArr);
+                    if (nowNum > 1000 && isPrime(nowNum) && check[nowNum] === false) {
+                        check[nowNum] = true;
+                        queue.push([count + 1, nowNum]);
+                    }
+                }
+            }
+        }
+    }
+    return -1;
+}
