@@ -59,21 +59,6 @@ function test2(arr, id) {
     return null;
 }
 
-// 다 통과되는 코드.
-function test2(arr, id) {
-    let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === id) {
-            return arr[i];
-        }
-        else if (Array.isArray(arr[i].children)) {
-            let nextArr = arr[i].children;
-            newArr = newArr.concat(nextArr);
-        }
-    }
-    if (newArr.length > 0) {
-        return test2(newArr, id);
-    }
-    return null;
-}
+
+
 
