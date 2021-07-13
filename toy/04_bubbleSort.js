@@ -14,7 +14,7 @@ const bubbleSort = function (arr) {
     return arr;
 }
 
-/**
+/*
  * 내 코드 2번..... 테스트 2개 통과안됨
  * advanced 통과안됨.........................수행 시간을 단축 못 함 !
  * RangeError: Maximum call stack size exceeded
@@ -35,6 +35,26 @@ const bubbleSort = function (arr, pointer = arr.length - 1) {
     return bubbleSort(arr, pointer - 1);
 
 };
+
+/*
+ * 통과한 내 코드. 
+ */
+function bubbleSort(arr) {
+    let noSwaps;
+    for (let i = arr.length; i > 0; i--) {
+        noSwaps = true;
+        for (let j = 0; j < i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                noSwaps = false;
+            }
+        }
+        if (noSwaps) break;
+    }
+    return arr;
+}
 
 // reference code
 const swap = function (idx1, idx2, arr) {
@@ -96,5 +116,27 @@ let bubbleSort = function (arr) {
         }
     }
 
+    return arr;
+};
+
+/*
+ * 
+ * study code. 
+ */
+const bubbleSort = function (arr) {
+    let flag = true;
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                const temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                flag = false;
+            }
+        }
+
+        if (flag) return arr;
+    }
     return arr;
 };

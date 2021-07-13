@@ -72,3 +72,43 @@ const mergeSort = function (arr) {
     const merged = merge(left, right);
     return merged;
 };
+
+/*
+ * 
+ * study code.
+ */
+const mergeSort = function (arr) {
+    // arr 의 요소가 1개 base case
+    if (arr.length < 2) return arr;
+
+    const [left, right] = divide(arr);
+    // 
+    return merge(mergeSort(left), mergeSort(right));
+};
+
+// 병합해주기
+function merge(left, right) {
+    let result = []
+
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift())
+        } else {
+            result.push(right.shift())
+        }
+    }
+
+    if (left.length) result = [...result, ...left]
+    if (right.length) result = [...result, ...right]
+
+    return result;
+}
+
+// 나누어주기
+function divide(arr) {
+    const pivot = Math.floor(arr.length / 2);
+    const left = arr.slice(0, pivot);
+    const right = arr.slice(pivot);
+
+    return [left, right]
+}

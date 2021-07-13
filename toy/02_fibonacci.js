@@ -43,3 +43,20 @@ let fibonacci = function (n) {
     };
     return aux(n);
 };
+
+/*
+ * study code.
+ * 
+ * 객체에 인자와 결과 값을 저장해두고, 같은 인자이면, 조회하여 반환.(캐시)
+ * 
+ * 캐시를 사용 {key: value ...}
+ * 캐시에 없으면 직접 계산 후 캐시에 저장
+ * 캐시에 있다면 캐시에서 직접 꺼내기
+ */
+const cache = {};
+function fibonacci(n) {
+    if (n < 2) return n;
+    if (!cache[n]) cache[n] = fibonacci(n - 1) + fibonacci(n - 2); // 캐시에 없을 때만 재귀 호출
+
+    return cache[n]; // 있다면 캐시에서 찾아서 반환
+}
