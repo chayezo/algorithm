@@ -58,7 +58,3 @@ function test2(arr, id) {
     }
     return null;
 }
-
-
-
-
