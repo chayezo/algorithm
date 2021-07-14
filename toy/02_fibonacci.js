@@ -43,7 +43,6 @@ let fibonacci = function (n) {
     };
     return aux(n);
 };
-
 /*
  * study code.
  * 
