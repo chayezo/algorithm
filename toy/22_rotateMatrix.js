@@ -24,9 +24,6 @@ const rotateMatrix = function (matrix) {
  * advanced까지 통과.
  */
 const rotateMatrix = function (matrix, k = 1) {
-    // TODO: 2차원 N x N 배열을 시계 방향으로 90도 회전시킨 배열
-    // 그냥 배열의 위치를 재정의 해주면 된다.
-    // 배열을 만들어서 안에 넣어주자.
     if (matrix.length === 0) return matrix;
     for (let i = 0; i < k; i++) {  // k번 실행
         matrix = rotate(matrix);
@@ -90,4 +87,61 @@ const rotateMatrix = function (matrix, rotateNum = 1) {
     }
 
     return rotated;
+};
+/*
+ * 공부해보기 !
+ */
+const rotateMatrix = function (matrix, k = 1) {
+    // ----------------------------------------------------------- Bare Minimum
+    // const result = new Array(matrix.length).fill(0).map((el) => el = new Array(matrix.length).fill(0));
+
+    // for(let i=0; i<matrix.length; i++) {
+    //   for(let j=0; j<matrix.length; j++) {
+    //     result[i][j] = matrix[matrix.length-j-1][i];
+    //   }
+    // }
+
+    // return result;
+
+
+    // ------------------------------------------------------------ Advanced
+    let num = k % 4;
+    let result = [];
+
+    if (matrix.length === 0) {
+        return result;
+    }
+
+    if (num === 0) {
+        result = matrix;
+    }
+
+    else if (num === 1) {
+        result = new Array(matrix[0].length).fill(0).map((el) => el = new Array(matrix.length).fill(0));
+        for (let i = 0; i < matrix[0].length; i++) {
+            for (let j = 0; j < matrix.length; j++) {
+                result[i][j] = matrix[matrix.length - j - 1][i];
+            }
+        }
+    }
+
+    else if (num === 2) {
+        result = new Array(matrix.length).fill(0).map((el) => el = new Array(matrix[0].length).fill(0));
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[0].length; j++) {
+                result[i][j] = matrix[matrix.length - i - 1][matrix[0].length - j - 1];
+            }
+        }
+    }
+
+    else if (num === 3) {
+        result = new Array(matrix[0].length).fill(0).map((el) => el = new Array(matrix.length).fill(0));
+        for (let i = 0; i < matrix[0].length; i++) {
+            for (let j = 0; j < matrix.length; j++) {
+                result[i][j] = matrix[j][matrix[0].length - i - 1];
+            }
+        }
+    }
+
+    return result;
 };
