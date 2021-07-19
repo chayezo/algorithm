@@ -48,6 +48,41 @@ const spiralTraversal = function (matrix) {
 };
 
 /*
+ * 
+ */
+const spiralTraversal = function (matrix, spiral = []) {
+    // base case
+    if (!matrix.length) {
+        return spiral;
+    }
+    // top left to top right
+    while (matrix[0].length) {
+        spiral.push(matrix[0].shift());
+    }
+    // top right to bottom right
+    matrix.forEach(row => {
+        spiral.push(row.pop());
+    });
+    // bottom right to bottom left
+    while (matrix[matrix.length - 1].length) {
+        spiral.push(matrix[matrix.length - 1].pop());
+    }
+    // bottom left to top left
+    matrix.reverse().forEach(row => {
+        spiral.push(row.shift());
+    });
+    // reverse again 
+    matrix.reverse();
+    // filter out any empty arrays
+    matrix = matrix.filter(el => el.length);
+    // recursive case
+    spiral = spiralTraversal(matrix, spiral);
+    // return spiral and filter any undefined elements
+    return spiral.filter(el => el);
+};
+
+
+/*
  * reference code
  */
 const spiralTraversal = function (matrix) {
