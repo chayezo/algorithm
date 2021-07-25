@@ -115,3 +115,51 @@ const gossipProtocol = function (village, row, col) {
     }
     return cnt;
 };
+
+/*
+ * 
+ * BFS
+ * 연결된 모든 정점들을 x로 바꾸면서 카운트를 ++ 해주면
+ * 나중에 반복문이 종료되었을 때 카운트를 리턴 ?
+ */
+const createMatrix = (village) => {
+    const matrix = [];
+    village.forEach((line) => {
+        const row = [];
+        for (let i = 0; i < line.length; i++) row.push(line[i]);
+        matrix.push(row);
+    });
+    return matrix;
+};
+// 주어진 함수 행렬(Matrix)를 만들어주는 모듈
+
+const gossipProtocol = function (village, row, col) {
+    const matrix = createMatrix(village);
+    let count = 0;
+    let start = [row, col, count];
+
+    return bfs(start);
+
+    function bfs(location) {
+        const queue = [location];
+        const countSaver = [];
+        matrix[location[0]][location[1]] = 1;
+
+        while (queue.length > 0) {
+            let [Y, X, count] = queue.shift();
+            if (Y < 0 || X < 0 || Y >= matrix.lenth || X >= matrix[0].length) continue;
+            if (matrix[Y][X] === 1) {
+                matrix[Y][X] = 'x';
+                countSaver.push(count);
+            } else {
+                continue;
+            }
+
+            queue.push([Y - 1, X, count + 1]);
+            queue.push([Y + 1, X, count + 1]);
+            queue.push([Y, X - 1, count + 1]);
+            queue.push([Y, X + 1, count + 1]);
+        }
+        return Math.max(...countSaver);
+    }
+}
