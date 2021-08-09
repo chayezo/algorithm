@@ -1,3 +1,34 @@
+// 일반적인 재귀문제. 4등분을 어떻게 재귀해 나갈지 ???
+// image 배열의 요소들을 4등분으로 잘게 쪼개 나간후 (요소 하나가 남을 때까지 쪼갠다.)
+// 쪼갠 요소들로부터 판든을 진행해 나가면서 합쳐준다.
+// rs = y축 시작, re = y축의 끝, cs = x축의 시작, ce = x축의 끝
+
+const decompression = function (image) {
+    const aux = (rs, re, cs, ce) => {
+        // rs === re -> cs === ce
+        if (rs === re) return String(image[rs][cs]);
+
+        const midRow = Math.floor((rs + re) / 2);
+        const midCol = Math.floor((cs + ce) / 2);
+        const leftUpper = aux(rs, midRow, cs, midCol);
+        const rightUpper = aux(rs, midRow, midCol + 1, ce);
+        const leftDown = aux(midRow + 1, re, cs, midCol);
+        const rightDown = aux(midRow + 1, re, midCol + 1, ce);
+
+        const result = leftUpper + rightUpper + leftDown + rightDown;
+        if (result === '1111') {
+            return '1';
+        } else if (result === '0000') {
+            return '0';
+        } else {
+            return 'X' + result;
+        }
+    }
+    return aux(0, image.length - 1, 0, image[0].length - 1);
+}
+
+
+
 /*
 const image = [
   [1, 0, 1, 1],
@@ -22,6 +53,7 @@ const image = [
    그리고 나머지 좌상, 우상, 좌하, 우하 사각형은 최소단위 이므로 차례대로 1, 1, 0, 0 을 그대로 적습니다.
     => XX100110X1100
 */
+
 const decompression = function (image) {
     // 재귀를 위한 보조 함수
     // 파라미터는 차례대로 y좌표의 시작(Row Start), y좌표의 끝(Row End), x좌표의 시작(Col Start), x좌표의 끝(Col End)
