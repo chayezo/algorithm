@@ -28,6 +28,7 @@ const countIslands = function (grid) {
     return numIslands;
 };
 
+//-----------------------------------------------------------------------------------
 // bfs
 const countIslands = grid => {
     let numIslands = 0;
