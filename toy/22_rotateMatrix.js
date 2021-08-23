@@ -44,6 +44,61 @@ const rotate = (matrix) => {
 };
 
 /*
+ * 제출한 코드 2.
+ * 
+ */
+const rotateMatrix = function (matrix, k) {
+    // TODO: 세로와 가로의 길이가 각각 M, N인 2차원 M X N 배열을 시계방향으로 90도씩 K번 회전시킨 배열을 리턴
+    // 회전수 ->
+    // k 4로 나눴을 때 나머지가 1, 2, 3, 0
+    // 1 :
+    //   90도 회전 후의 배열 : result
+    //   matrix의 한 요소 길이가 result 배열의 길이
+    //   그 길이만큼 빈배열
+    //   이중 반복문으로 요소를 하나하나 90도 회전한 위치에 넣어준다.
+    //   matrix는 0번째 요소부터 추출하지만 result에서는 끝에서부터 채워지므로
+    //   일단 result에 0부터 채워넣은 다음 reverse를 해준다!(이 문제의 포인트)****    
+    // 2 : matrix reverse 두번
+    // 3 : 1의 결과를 reverse 두번
+    // 0 : matrix 그대로
+    if (matrix.length === 0) return [];
+    let result = [];
+    for (let i = 0; i < matrix[0].length; i++) {
+        result.push([]);
+    }
+    for (let j = 0; j < matrix[0].length; j++) {
+        for (let k = 0; k < matrix.length; k++) {
+            // matrix의 세로 방향 요소들을 result의 가로방향 요소들로 import
+            result[j].push(matrix[k][j]);
+        }
+        // 그리고 result의 요소들은 reverse 해준다.
+        result[j].reverse();
+    } // 90도 돌렸을 때 result 배열 만들기.
+
+    if (k % 4 === 0) {
+        return matrix;
+    }
+    else if (k === undefined || k % 4 === 1) {
+        return result;
+    }
+    else if (k % 4 === 2) {
+        for (let i = 0; i < matrix.length; i++) {
+            matrix[i].reverse(); // 행렬의 각 요소를 reverse
+        }
+        matrix.reverse(); // 행렬 전체도 reverse
+        return matrix;
+    }
+    else {
+        for (let i = 0; i < result.length; i++) {
+            result[i].reverse();
+        }
+        result.reverse();
+        return result;
+    }
+};
+
+
+/*
  * reference code
  */
 // const rotateMatrix = function (matrix) {
