@@ -46,6 +46,50 @@ const spiralTraversal = function (matrix) {
     }
     return result;
 };
+/*
+ * 제출한 코드 2
+ *
+ */
+const spiralTraversal = function (matrix) {
+    // TODO: 2차원 M x N 배열을 나선형(spiral)으로 순회
+    // for문 4번 :  상 하 좌 우
+    //  a, b | c, f | d, g | h, i
+    //   let matrix = [
+    //   ['A', 'B', 'C'],
+    //   ['D', 'E', 'F'],
+    //   ['G', 'H', 'I'],
+    // ];
+    // 재귀 탈출 : matrix.length === 0 || matrix.length === 1
+    let str = '';
+    if (matrix.length === 0) return '';
+    if (matrix.length === 1) {
+        for (let i = 0; i < matrix[0].length; i++) {
+            str += matrix[0][i];
+        }
+        return str;
+    }
+
+    // 한 바퀴 돌아서 문자열로 누적
+    for (let i = 0; i < matrix[0].length - 1; i++) {
+        str += matrix[0][i];
+    }
+    for (let i = 0; i < matrix.length - 1; i++) {
+        str += matrix[i][matrix[0].length - 1];
+    }
+    for (let i = matrix[0].length - 1; i > 0; i--) {
+        str += matrix[matrix.length - 1][i];
+    }
+    for (let i = matrix.length - 1; i > 0; i--) {
+        str += matrix[i][0];
+    }
+
+    const smallMatrix = matrix.slice(1, matrix.length - 1);
+    for (let i = 0; i < smallMatrix.length; i++) {
+        smallMatrix[i] = smallMatrix[i].slice(1, smallMatrix[i].length - 1);
+    }
+    return str + spiralTraversal(smallMatrix);
+};
+
 
 /*
  * 다시 생각해보기.
