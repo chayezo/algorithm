@@ -37,9 +37,8 @@ const LSCS = function (arr) {
   return max;
 };
 
-
-//LSCS: 주어진 배열의 연속된 부분 배열의 합을 구한다고 할 때, 이 중 가장 큰 값(Largest Sum of Contiguous Subarray)
-//연속 부분 배열 ex) [1,2,3] => [1], [2], [3], [1,2], [2,3], [1,2,3]
+// LSCS: 주어진 배열의 연속된 부분 배열의 합을 구한다고 할 때, 이 중 가장 큰 값(Largest Sum of Contiguous Subarray)
+// 연속 부분 배열 ex) [1,2,3] => [1], [2], [3], [1,2], [2,3], [1,2,3]
 const LSCS = function (arr) {
   let sumItem = 0;
   let max = Number.MIN_SAFE_INTEGER;
